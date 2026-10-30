@@ -4156,5 +4156,575 @@ window.ATLAS_PALETTES = [
       "美容・飲食・サービス"
     ],
     "colorSource": "画面記載HEX"
+  },
+  {
+    "id": "209",
+    "name": "ポップシトラス",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFFDF4",
+    "sub": "#FFE500",
+    "accent": "#FF3B30",
+    "description": "レモンイエローに赤を効かせた、元気な告知やバナー向けの配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ポップ",
+      "告知",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "210",
+    "name": "ストロベリーパンチ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF5F8",
+    "sub": "#FF4D8D",
+    "accent": "#7C3AED",
+    "description": "鮮やかなピンクと紫で、スイーツや美容の投稿を華やかに。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ピンク",
+      "スイーツ",
+      "美容"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "211",
+    "name": "ブルーオレンジ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F3F8FF",
+    "sub": "#2563EB",
+    "accent": "#FF6B00",
+    "description": "青とオレンジの明快な対比で、Webの導線やCTAを印象的に。",
+    "tags": [
+      "ビビッド・鮮色",
+      "Web",
+      "UI",
+      "CTA"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "212",
+    "name": "キャンディクラッシュ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFFAFF",
+    "sub": "#FF4FC3",
+    "accent": "#00C2FF",
+    "description": "ピンクとシアンを合わせた、軽快で遊び心のあるSNS配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "SNS",
+      "かわいい",
+      "ポップ"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "213",
+    "name": "ライムスパーク",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F7FFE8",
+    "sub": "#C6F500",
+    "accent": "#1B4DFF",
+    "description": "ライムと鮮やかな青で、アクティブな企画に切れ味を添える。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ライム",
+      "スポーツ",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "214",
+    "name": "トロピカルウェーブ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F1FFFD",
+    "sub": "#00CDB4",
+    "accent": "#FF4C4C",
+    "description": "青緑と赤の対比が引き立つ、夏のキャンペーン向け配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "夏",
+      "トロピカル",
+      "キャンペーン"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "215",
+    "name": "サイバーインク",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#0B1020",
+    "sub": "#2563FF",
+    "accent": "#7CFFB2",
+    "description": "深い夜色に青とミントが映える、デジタルなダーク配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ダーク",
+      "テック",
+      "UI"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "216",
+    "name": "ブライトダッシュ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFFFFF",
+    "sub": "#1B64FF",
+    "accent": "#FF7A00",
+    "description": "白の余白に青とオレンジを置き、情報と操作を明快に。",
+    "tags": [
+      "ビビッド・鮮色",
+      "Web",
+      "UI",
+      "LP"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "217",
+    "name": "コバルトグリッド",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F6F8FF",
+    "sub": "#0047FF",
+    "accent": "#FB7185",
+    "description": "コバルトブルーとコーラルで、端正さと親しみを両立。",
+    "tags": [
+      "ビビッド・鮮色",
+      "Web",
+      "UI",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "218",
+    "name": "エメラルドUI",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F4FFFA",
+    "sub": "#00B88D",
+    "accent": "#2A55FF",
+    "description": "エメラルドと青を使い分けた、清潔で活発なUI配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "UI",
+      "Web",
+      "清潔感"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "219",
+    "name": "デジタルパープル",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F8F5FF",
+    "sub": "#7C3AED",
+    "accent": "#00D4FF",
+    "description": "紫とシアンで、未来的なサービスやデジタル作品を彩る。",
+    "tags": [
+      "ビビッド・鮮色",
+      "テック",
+      "UI",
+      "LP"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "220",
+    "name": "ネオンサイン",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#090B16",
+    "sub": "#F0F500",
+    "accent": "#FF2CB2",
+    "description": "暗い背景に黄とピンクが光る、夜の告知向け配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ネオン",
+      "ナイト",
+      "告知"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "221",
+    "name": "コーラルブースト",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF7F2",
+    "sub": "#FF643A",
+    "accent": "#2D40FF",
+    "description": "鮮明なコーラルと青で、販促やバナーに勢いを添える。",
+    "tags": [
+      "ビビッド・鮮色",
+      "バナー",
+      "販促",
+      "コーラル"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "222",
+    "name": "スカーレットスイッチ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF6F3",
+    "sub": "#F83B43",
+    "accent": "#00B3FF",
+    "description": "赤と水色のはっきりした対比で、注目点を作る配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "広告",
+      "強調",
+      "UI"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "223",
+    "name": "サンライズアクティブ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF9E9",
+    "sub": "#FF9500",
+    "accent": "#0057FF",
+    "description": "オレンジと青で、朝の活動やスポーツの明るさを表現。",
+    "tags": [
+      "ビビッド・鮮色",
+      "スポーツ",
+      "朝",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "224",
+    "name": "ブルーミントラン",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F1FFFC",
+    "sub": "#00B8A9",
+    "accent": "#FF445F",
+    "description": "涼しい青緑に赤を差した、軽やかな活動感のある配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "爽やか",
+      "スポーツ",
+      "Web"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "225",
+    "name": "リフレッシュライム",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FCFFF1",
+    "sub": "#AEF312",
+    "accent": "#111827",
+    "description": "明るいライムと深い墨色で、自然とメリハリを両立。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ライム",
+      "ナチュラル",
+      "UI"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "226",
+    "name": "ビタミンオレンジ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF8F1",
+    "sub": "#FF8400",
+    "accent": "#E72B68",
+    "description": "オレンジとベリー色で、食やイベントを元気に見せる。",
+    "tags": [
+      "ビビッド・鮮色",
+      "食品",
+      "イベント",
+      "販促"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "227",
+    "name": "ホットマゼンタ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF5FC",
+    "sub": "#E91EAE",
+    "accent": "#2B59FF",
+    "description": "マゼンタと青の強いコントラストが目を引く配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "ファッション",
+      "SNS",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "228",
+    "name": "ドリームラベンダー",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FDF8FF",
+    "sub": "#A855F7",
+    "accent": "#FF3B81",
+    "description": "紫と鮮やかなピンクで、夢のある華やかな世界観に。",
+    "tags": [
+      "ビビッド・鮮色",
+      "紫",
+      "美容",
+      "クリエイティブ"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "229",
+    "name": "グロッシーペア",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F8FFF3",
+    "sub": "#49D548",
+    "accent": "#FE3F76",
+    "description": "みずみずしい緑とピンクで、フルーツのような鮮度を。",
+    "tags": [
+      "ビビッド・鮮色",
+      "フルーツ",
+      "緑",
+      "キャンペーン"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "230",
+    "name": "ピーチコントラスト",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFF7F0",
+    "sub": "#FF6E5C",
+    "accent": "#6A35FF",
+    "description": "ピーチ系の暖色に紫を効かせ、やさしさと強さを表現。",
+    "tags": [
+      "ビビッド・鮮色",
+      "美容",
+      "コーラル",
+      "SNS"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "231",
+    "name": "ブルーベリーポップ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F5F2FF",
+    "sub": "#725CFF",
+    "accent": "#FFBC2D",
+    "description": "ブルーベリー色と黄橙の対比で、楽しい注目ポイントを。",
+    "tags": [
+      "ビビッド・鮮色",
+      "紫",
+      "ポップ",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "232",
+    "name": "シトラスローズ",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFFBEF",
+    "sub": "#FFCA1A",
+    "accent": "#E73564",
+    "description": "シトラスイエローとローズの華やかで明るい組み合わせ。",
+    "tags": [
+      "ビビッド・鮮色",
+      "黄",
+      "ギフト",
+      "販促"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "233",
+    "name": "Electric Blue",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F8FAFF",
+    "sub": "#2563FF",
+    "accent": "#00D4FF",
+    "description": "明るい背景に電気的な青とシアンを重ねた、Web・UI向け配色。",
+    "tags": [
+      "ビビッド・鮮色",
+      "Web",
+      "UI",
+      "LP",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "234",
+    "name": "Vivid Purple",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#F9F8FF",
+    "sub": "#7045FF",
+    "accent": "#FF3DB8",
+    "description": "紫とピンクの鮮烈な対比で、LPやデジタルバナーを印象的に。",
+    "tags": [
+      "ビビッド・鮮色",
+      "Web",
+      "UI",
+      "LP",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
+  },
+  {
+    "id": "235",
+    "name": "Pop Coral",
+    "category": "ビビッド・鮮色",
+    "categoryType": "main",
+    "base": "#FFFDFC",
+    "sub": "#EB625C",
+    "accent": "#326BFF",
+    "description": "コーラルとブルーで、親しみやすく明快なWebデザインに。",
+    "tags": [
+      "ビビッド・鮮色",
+      "Web",
+      "UI",
+      "LP",
+      "バナー"
+    ],
+    "purposes": [
+      "Webサイト・LP",
+      "SNS・サムネイル",
+      "広告・販促デザイン"
+    ]
   }
 ];

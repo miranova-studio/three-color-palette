@@ -6,6 +6,7 @@ const groupNames={main:'メイン',season:'季節',event:'イベント'};
 const detail=$('#detail'),manual=$('#manual'),narrow=matchMedia('(max-width:1100px)');
 let promptMode='new';
 let usageMode='slides';
+let baseMode='original',designTextMode='auto';
 const ratio=Object.freeze([70,25,5]);
 let category='',color='',season='',purposes=new Set(),view='all',selected=null,opener=null,timer,favorites=new Set(),recent=[];
 function node(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;}
@@ -18,9 +19,9 @@ function luminance(hex) {
 }
 function textColor(hex) {return luminance(hex)>.179128784747792 ? '#000000' : '#FFFFFF';}
 function validate(items) {
- if (!Array.isArray(items)||items.length!==208) throw Error('208件の配色データが必要です');
+ if (!Array.isArray(items)||items.length!==235) throw Error('235件の配色データが必要です');
  const ids=new Set(),names=new Set(),sets=new Set(),categories=new Map();
- const expected={main:['ポップ','ビビッド','ネオン','パステル','くすみカラー','モノトーン','クール','爽やか','ナチュラル','アースカラー','韓国風','高級・エレガント','レトロ'],season:['春','夏','秋','冬'],event:['ハロウィン','クリスマス']};
+ const expected={main:['ポップ','ビビッド','ビビッド・鮮色','ネオン','パステル','くすみカラー','モノトーン','クール','爽やか','ナチュラル','アースカラー','韓国風','高級・エレガント','レトロ'],season:['春','夏','秋','冬'],event:['ハロウィン','クリスマス']};
  items.forEach((p,i)=>{
   if(p.id!==String(i+1).padStart(3,'0')||ids.has(p.id)) throw Error('番号または名前が不正です');
   for(const key of ['name','category','categoryType','description']) if(typeof p[key]!=='string'||!p[key]) throw Error('必須項目がありません');
@@ -32,7 +33,7 @@ function validate(items) {
   const set=roles.map(k=>p[k]).join(',');if(sets.has(set)) throw Error('色セットが重複しています');
   ids.add(p.id);names.add(p.name);sets.add(set);categories.set(p.category,(categories.get(p.category)||0)+1);
  });
- if(categories.size!==19) throw Error('ジャンル件数が不正です');
+ if(categories.size!==20) throw Error('ジャンル件数が不正です');
 }
 function allText(p){return roles.map((r,i)=>`${labels[i]}: ${p[r]}`).join('\n');}
 function promptText(p){
@@ -45,7 +46,10 @@ Sub（${ratio[1]}%）：${p.sub}
 Accent（${ratio[2]}%）：${p.accent}
 役割：見出し・装飾・ボタン・強調部分などに使用する差し色
 
-配色比率はBase ${ratio[0]}%、Sub ${ratio[1]}%、Accent ${ratio[2]}%を目安にしてください。この比率はデザイン全体に使用する色面積の基本の目安です。デザインの目的や文字の視認性に応じて調整してかまいません。`;
+配色比率はBase ${ratio[0]}%、Sub ${ratio[1]}%、Accent ${ratio[2]}%を目安にしてください。この比率はデザイン全体に使用する色面積の基本の目安です。デザインの目的や文字の視認性に応じて調整してかまいません。
+
+補助文字色（${designTextMode==='auto'?'自動選択':designTextMode==='white'?'ホワイト指定':'ブラック指定'}）：${chosenTextColor(p.base)}
+文字色は可読性を補う補助カラーであり、登録する3色パレットには含めません。${designTextMode==='auto'?'必要な文字はこの読みやすい色を基本にしてください。':'文字には指定色を使用し、白黒を自動で置き換えないでください。コントラストに注意してください。'}`;
  return promptMode==='recolor'
  ? `現在のデザインについて、レイアウト・構成・テキスト・画像・サイズ・配置などは維持したまま、配色のみを次の3色に変更してください。
 
@@ -64,7 +68,7 @@ function setPromptMode(mode){
  promptMode=mode;
  document.querySelectorAll('[data-prompt-mode]').forEach(tab=>{const active=tab.dataset.promptMode===mode;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
  $('#prompt-panel').setAttribute('aria-labelledby',mode==='new'?'prompt-tab-new':'prompt-tab-recolor');
- if(selected){$('#prompt').value=promptText(selected);$('#prompt').scrollTop=0;}
+ if(selected){$('#prompt').value=promptText(effectivePalette());$('#prompt').scrollTop=0;}
 }
 $('#prompt-tabs').addEventListener('click',e=>{const tab=e.target.closest('[data-prompt-mode]');if(tab)setPromptMode(tab.dataset.promptMode);});
 $('#prompt-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll('[data-prompt-mode]')];const current=tabs.indexOf(e.target.closest('[data-prompt-mode]'));const index=e.key==='Home'?0:e.key==='End'?1:(current+1)%tabs.length;setPromptMode(tabs[index].dataset.promptMode);tabs[index].focus();});
@@ -93,7 +97,14 @@ function preview(p){const el=node('div','palette');roles.forEach(role=>{const s=
 function tags(p){const el=node('div','tags');p.tags.slice(0,3).forEach(t=>el.append(node('span','tag',t)));return el;}
 function syncFavorites(){const yes=!!selected&&favorites.has(selected.id);for(const el of [$('#detail-heart'),$('#favorite-add')]){el.setAttribute('aria-pressed',String(yes));el.setAttribute('aria-label',yes?'お気に入りから削除':'お気に入りに追加');}$('#favorite-label').textContent=yes?'お気に入り登録済み':'お気に入りに追加';document.querySelectorAll('.card>.heart').forEach(b=>{const on=favorites.has(b.dataset.id);b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',`${b.dataset.name}をお気に入り${on?'から削除':'に追加'}`);});}
 function toggleFavorite(p){if(favorites.has(p.id))favorites.delete(p.id);else favorites.add(p.id);saveStorage();syncFavorites();if(view==='favorites')render();}
-function populateDetail(p){selected=p;$('#detail-no').textContent=`No.${p.id}`;$('#detail-title').textContent=p.name;$('#detail-description').textContent=p.description;$('#detail-preview').replaceChildren(...preview(p).childNodes);$('#detail-tags').replaceChildren(...tags(p).childNodes);$('#detail-colors').replaceChildren();roles.forEach((r,i)=>{const row=node('div','color-row'),button=node('button');button.append(icon('copy'));button.setAttribute('aria-label',`${labels[i]} ${p[r]}をコピー`);button.addEventListener('click',()=>copy(p[r]));row.append(node('strong','',labels[i]),node('code','',p[r]),button);$('#detail-colors').append(row);});$('#prompt').value=promptText(p);const sample=$('#usage-preview');for(const r of roles)sample.style.setProperty('--'+r,p[r]);for(const r of roles)sample.style.setProperty('--'+r+'-text',textColor(p[r]));syncFavorites();document.querySelectorAll('.card').forEach(el=>el.classList.toggle('selected',el.dataset.id===p.id));}
+function effectivePalette(){return selected?{...selected,base:baseMode==='original'?selected.base:baseMode==='white'?'#FFFFFF':'#000000'}:null;}
+function chosenTextColor(base){return designTextMode==='auto'?textColor(base):designTextMode==='white'?'#FFFFFF':'#000000';}
+function contrastRatio(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+function populateDetail(p){if(selected?.id!==p.id){baseMode='original';designTextMode='auto';}selected=p;renderDetail();}
+function renderDetail(){const p=effectivePalette();$('#detail-no').textContent=`No.${p.id}`;$('#detail-title').textContent=p.name;$('#detail-description').textContent=p.description;$('#detail-preview').replaceChildren(...preview(p).childNodes);$('#detail-tags').replaceChildren(...tags(p).childNodes);$('#detail-colors').replaceChildren();roles.forEach((r,i)=>{const row=node('div','color-row'),button=node('button');button.append(icon('copy'));button.setAttribute('aria-label',`${labels[i]} ${p[r]}をコピー`);button.addEventListener('click',()=>copy(p[r]));row.append(node('strong','',labels[i]),node('code','',p[r]),button);$('#detail-colors').append(row);});$('#prompt').value=promptText(p);const sample=$('#usage-preview');for(const r of roles)sample.style.setProperty('--'+r,p[r]);for(const r of roles)sample.style.setProperty('--'+r+'-text',textColor(p[r]));$('#base-mode').value=baseMode;$('#text-mode').value=designTextMode;
+ const chosen=chosenTextColor(p.base);sample.style.setProperty('--design-text',chosen);sample.classList.toggle('manual-text',designTextMode!=='auto');
+ const contrast=contrastRatio(p.base,chosen);$('#contrast-warning').hidden=contrast>=4.5;$('#contrast-warning').textContent=`背景（Base）と文字色のコントラストは ${contrast.toFixed(2)}:1です。4.5:1未満のため、使用イメージの文字が読みにくくなる場合があります。指定色は維持しています。`;
+ syncFavorites();document.querySelectorAll('.card').forEach(el=>el.classList.toggle('selected',el.dataset.id===p.id));}
 function openDetail(p,trigger){opener=trigger;populateDetail(p);recent=[p.id,...recent.filter(id=>id!==p.id)].slice(0,30);saveStorage();document.body.classList.remove('panel-closed');detail.scrollTop=0;if(narrow.matches){detail.classList.add('overlay-open');detail.setAttribute('role','dialog');detail.setAttribute('aria-modal','true');$('#detail-backdrop').hidden=false;$('#detail-title').focus();}syncScroll();if(view==='recent')render();}
 function closeDetail(){detail.classList.remove('overlay-open');detail.removeAttribute('role');detail.removeAttribute('aria-modal');document.body.classList.add('panel-closed');$('#detail-backdrop').hidden=true;syncScroll();if(opener?.isConnected)opener.focus();else $('#search').focus();}
 function card(p){const el=node('article','card');el.dataset.id=p.id;el.classList.toggle('selected',selected?.id===p.id);const open=node('button','card-open');open.setAttribute('aria-label',`No.${p.id} ${p.name}の詳細を開く`);const codes=node('div','codes');roles.forEach((r,i)=>{const cell=node('span');cell.append(node('small','',labels[i]),document.createTextNode(p[r]));codes.append(cell);});open.append(node('span','card-no',`No.${p.id}`),node('h3','',p.name),preview(p),codes);open.addEventListener('click',()=>openDetail(p,open));const heart=node('button','heart');heart.dataset.id=p.id;heart.dataset.name=p.name;heart.append(icon('heart'));heart.addEventListener('click',()=>toggleFavorite(p));const bottom=node('div','card-bottom');bottom.append(tags(p));el.append(open,heart,bottom);return el;}
@@ -124,7 +135,7 @@ function syncCategories(){document.querySelectorAll('[data-category]').forEach(b
 const colorTools=window.ATLAS_COLOR_TOOLS;
 function initColors(){colorTools.options.forEach(([key,label,hex])=>{const b=node('button','color-chip');b.dataset.color=key;b.style.setProperty('--chip',hex);b.append(node('span','chip-dot'),node('span','chip-label',label));b.setAttribute('aria-label',label+'系統で絞り込み');b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{color=color===key?'':key;document.querySelectorAll('[data-color]').forEach(x=>{x.classList.toggle('active',x.dataset.color===color);x.setAttribute('aria-pressed',String(x.dataset.color===color));});$('#color-hint').textContent=color?`${label}系統を含む配色`:'3色のいずれかの色系統で絞り込み';render();});$('#color-filters').append(b);});}
 const nameCollator=new Intl.Collator('ja',{usage:'sort',sensitivity:'base'});
-const tasteOrder=['ポップ','ビビッド','ネオン','パステル','くすみカラー','モノトーン','クール','爽やか','ナチュラル','アースカラー','韓国風','高級・エレガント','レトロ','春','夏','秋','冬','ハロウィン','クリスマス'];
+const tasteOrder=['ポップ','ビビッド','ネオン','パステル','くすみカラー','モノトーン','クール','爽やか','ナチュラル','アースカラー','韓国風','高級・エレガント','レトロ','ビビッド・鮮色','春','夏','秋','冬','ハロウィン','クリスマス'];
 function sortPalettes(items,sort){return items.sort((a,b)=>{
  let difference=0;
  if(sort==='name')difference=nameCollator.compare(window.ATLAS_READINGS[a.id],window.ATLAS_READINGS[b.id]);
@@ -139,7 +150,9 @@ function setView(next){view=next;$('#view-title').textContent={all:'3色のカ�
 function reset(){category='';color='';season='';purposes.clear();syncSeasonEvents();document.querySelectorAll('[data-purpose]').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});$('#search').value='';$('#sort').value='number';syncCategories();document.querySelectorAll('[data-color]').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});$('#color-hint').textContent='3色のいずれかの色系統で絞り込み';setView('all');}
 $('#categories').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;category=b.dataset.category;syncCategories();render();});
 $('#search').addEventListener('input',render);$('#sort').addEventListener('change',render);$('#reset').addEventListener('click',reset);$('#empty-reset').addEventListener('click',reset);document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-$('#detail-heart').addEventListener('click',()=>toggleFavorite(selected));$('#favorite-add').addEventListener('click',()=>toggleFavorite(selected));$('#copy-all').addEventListener('click',()=>copy(allText(selected)));for(const id of ['#copy-prompt','#copy-prompt-bottom'])$(id).addEventListener('click',()=>copy($('#prompt').value));$('#close-detail').addEventListener('click',closeDetail);$('#detail-backdrop').addEventListener('click',closeDetail);$('#close-manual').addEventListener('click',()=>manual.close());manual.addEventListener('close',syncScroll);
+$('#base-mode').addEventListener('change',e=>{baseMode=e.target.value;renderDetail();});
+$('#text-mode').addEventListener('change',e=>{designTextMode=e.target.value;renderDetail();});
+$('#detail-heart').addEventListener('click',()=>toggleFavorite(selected));$('#favorite-add').addEventListener('click',()=>toggleFavorite(selected));$('#copy-all').addEventListener('click',()=>copy(allText(effectivePalette())));for(const id of ['#copy-prompt','#copy-prompt-bottom'])$(id).addEventListener('click',()=>copy($('#prompt').value));$('#close-detail').addEventListener('click',closeDetail);$('#detail-backdrop').addEventListener('click',closeDetail);$('#close-manual').addEventListener('click',()=>manual.close());manual.addEventListener('close',syncScroll);
 function trap(e,container){if(e.key!=='Tab')return;const items=[...container.querySelectorAll('button,textarea,input,select,[tabindex="0"]')].filter(el=>!el.disabled&&el.getClientRects().length);const first=items[0],last=items[items.length-1],active=document.activeElement;if(e.shiftKey&&(active===first||!items.includes(active))){e.preventDefault();last?.focus();}else if(!e.shiftKey&&(active===last||!items.includes(active))){e.preventDefault();first?.focus();}}
 manual.addEventListener('keydown',e=>trap(e,manual));document.addEventListener('keydown',e=>{if(manual.open)return;if(e.key==='Escape'){if($('.sidebar').classList.contains('open')){$('.sidebar').classList.remove('open');$('#mobile-filter').setAttribute('aria-expanded','false');$('#mobile-filter').focus();}else if(!document.body.classList.contains('panel-closed'))closeDetail();}if(narrow.matches&&detail.classList.contains('overlay-open'))trap(e,detail);});
 $('#mobile-filter').addEventListener('click',()=>{const open=$('.sidebar').classList.toggle('open');$('#mobile-filter').setAttribute('aria-expanded',String(open));});
